@@ -1,5 +1,7 @@
 import Image from "next/image"
 import styles from '../styles/Header.module.css'
+
+import Nav from "./Nav";
 function Header({headerProps}) {
    const { titulo, eslogan, parrafo, imagen } = headerProps;
   return (
@@ -8,21 +10,21 @@ function Header({headerProps}) {
         <div className={styles.fondoimagen}>
            
           <Image 
-              layout='responsive' 
-              width={800} 
-              height={600} 
+              layout='fill'
+              objectFit='cover'
+              objectPosition='top'
               src={imagen.url} 
               alt={`Imagen header ${titulo}`} 
           /> 
 
-          
+            
 
             <div className={styles.fondoContenido}>
-              <div className="contenedor">
+              <Nav/>
+              <div className={`${styles.contenido} 'contenedor'`}>
                     <h1>{titulo}</h1>
                     <h2>{eslogan}</h2>
                     <p>{parrafo}</p>
-
               </div>
             </div>
 
