@@ -4,6 +4,17 @@
     align-items: center;
     margin: 3rem 0;
 }
+
+.imagen {
+    min-width: 100px;
+    padding: 0;
+}
+@media (max-width: 992px) {
+    .imagen {
+        padding: 0 2rem;
+    }
+}
+
 .navegacion {
     display: flex;
     justify-content: space-between;
@@ -45,19 +56,125 @@
     font-size: 3.5rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width:768px) {
     .enlaces, .icono:first-of-type {
         display: none;
     }
     .iconContenedor {
-        padding-left: 2rem;
-    }
-    .burgerMenu {
-        padding-right: 2rem;
+        padding-left: 0;
     }
 }
-@media (min-width: 768px) {
+
+.burgerMenu {
+    display: none;
+    width: 50px;
+    height: 38px;
+}
+.burgerMenu .inputMenu {
+    display: block;
+    width: 50px;
+    height: 38px;
+    position:absolute;
+    cursor: pointer;  
+    opacity: 0;
+    z-index: 2;
+}
+.burgerMenu svg {
+    display: block;
+    position: absolute;
+    width: 50px;
+    height: 38px;
+}
+.burgerMenu .inputMenu+div {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 2;
+}
+.burgerMenu .inputMenu:checked {
+    z-index: 3;
+    top: 0;
+    right: 0;
+    width: 100vh;
+    height: 100vh;
+}
+.burgerMenu .inputMenu:checked+div {
+    display: block;
+}
+.burgerMenu .inputMenu:checked~.contenedorMenuMovil {
+ 
+    transform: none;
+}
+
+@media (max-width:768px) {
     .burgerMenu {
-        display: none;
+        display: block;
     }
 }
+.contenedorMenuMovil {
+    background-color: var(--secondary);
+    width: 80%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    transform: translateX(-110%);
+    transition: transform .3s ease;
+}
+.cerrarMenuMovil {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateX(-50px);
+}
+.cerrarMenuMovil svg {
+    width: 50px;
+    height: 40px;
+}
+.inputCerrarMenu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 40px;
+    cursor: pointer;
+    opacity: 0;
+}
+.menuMovil {
+    margin: 9rem 0;
+    display: flex;
+    flex-direction: column;
+}
+.menuMovil a {
+    margin-bottom: 4rem;
+}
+.busquedaMenuMovil input, .busquedaMenuMovil svg {
+    height: 30px;
+}
+.busquedaMenuMovil {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 4rem auto;
+    max-width: 300px;
+    padding: 0 2rem;
+}
+.busquedaMenuMovil input {
+    width: 100%;
+    border: none;
+    border-radius: 5px 0 0 5px;
+}
+.iconoBusquedaMenuMovil {
+    background-color: var(--primary);
+    width: 60px;
+    height: 30px;
+    border-radius: 0 5px 5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

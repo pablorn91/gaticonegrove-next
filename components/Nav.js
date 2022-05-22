@@ -1,23 +1,69 @@
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { HiOutlineSearch, HiOutlineHeart, HiOutlineShoppingBag } from "react-icons/hi";
+import { HiOutlineSearch, HiOutlineHeart, HiOutlineShoppingBag, HiMenu, HiX } from "react-icons/hi";
 import styles from '../styles/Nav.module.css';
 
 const Nav = () => {
+
+    const [ isChecked, setIsChecked ] = useState(false);
+
+    const handleOnChange = () => {
+        setIsChecked(!isChecked);
+      };
+
   return (
 
         <div className='contenedor'>
              <nav className={styles.navegacionContenedor}>
 
-                    <div className={styles.burgerMenu}>
-                    Menu
+                    <div className={styles.burgerMenu}
+                    >
+                        <HiMenu/>
+                        <input 
+                            type='checkbox' 
+                            className={styles.inputMenu}
+                            checked={isChecked}
+                            onChange={handleOnChange}
+                        />
+                        <div>
+                        </div>
+                        <div className={styles.contenedorMenuMovil}>
+                        <div className={styles.cerrarMenuMovil}>
+                            <HiX/>
+                        </div>
+                        <input 
+                            type='checkbox' 
+                            className={styles.inputCerrarMenu} 
+                            checked={isChecked}
+                            onChange={handleOnChange}
+                        />
+                            <div className={styles.menuMovil}>
+                                
+                                    <div className={styles.busquedaMenuMovil}>
+                                        <input type='text' />
+                                        <div className={styles.iconoBusquedaMenuMovil}>
+                                        <HiOutlineSearch/>
+                                        </div>
+                                    </div>
+                                    <Link href='#'>Tienda</Link>
+                                    <Link href='#'>Colecciones</Link>
+                                    <Link href='#'>Personalizar</Link>
+                                
+                               
+                            </div>
+                        </div>
                     </div>
-                    <Image 
-                            width={300}
+
+                    <div className={styles.imagen}>
+                        <Image 
+                            width={280}
                             height={70}
                             src="/img/logo.svg" 
                             alt={'Logo Gatico Negro'} 
                         /> 
+                    </div>
+                        
           
                 <div className={styles.navegacion}>
                     <div className={styles.enlaces}>
