@@ -1,0 +1,88 @@
+.wrapDestacados {
+    height: 100%;
+}
+
+.destacados {
+    position: relative;
+    top: -5rem;
+    background-color: var(--blanco);
+    height: 100%;
+    padding: 5rem 0;
+    border-radius: 2rem;
+    box-shadow: 0 4px 5px rgba(30, 30, 30, 0.3);   
+}
+@media (min-width:768px) {
+   .destacados {
+    top: -9rem;
+   }
+}
+
+.contenidoDestacado {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 95%;
+}
+.contenidoDestacado h2 {
+    font-size: 5.2rem;
+    text-align: center;
+    margin: 0 0 3rem 0;
+}
+.botonDestacados {
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    padding: 1rem 3rem;
+    border-radius: 4px;
+    margin-top: 3rem;
+    transition: all .3s ease;
+}
+.botonDestacados:hover {
+    color: var(--blanco);
+    background-color: var(--primary);
+}
+
+/* Images Grid configuration */
+
+.imagesPrimaryGrid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .2s ease;
+}
+.imagesPrimaryGrid img:hover {
+    
+  transform: scale(1.05);
+
+}
+
+.imagesPrimaryGrid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    width: 98%;
+    max-width: 900px;
+    max-height: 600px;
+}
+.imagesSecondaryGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.image1 {
+    width: 100%;
+    max-width:600px;
+    max-height: 300px;
+    grid-column: 1/3;
+}
+.image2,.image3 {
+    width: 100%;
+    max-width: 300px;
+    max-height: 300px;
+    
+}
+.image4 {
+    width: 100%;
+    max-width: 300px;
+    max-height: 600px;
+}
