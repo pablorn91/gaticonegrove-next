@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { HiOutlineSearch, HiOutlineHeart, HiOutlineShoppingBag, HiMenu, HiX } from "react-icons/hi";
@@ -11,6 +11,15 @@ const Nav = () => {
     const handleOnChange = () => {
         setIsChecked(!isChecked);
       };
+
+    useEffect(() => {
+        const body = document.querySelector("body");
+        if(isChecked){
+            body.classList.add('noScroll')
+        } else {
+            body.classList.remove('noScroll')
+        }
+    },[isChecked])
 
   return (
 
@@ -55,7 +64,7 @@ const Nav = () => {
                         </div>
                     </div>
 
-                    <div className={styles.imagen}>
+                    <div className={styles.logo}>
                         <Image 
                             width={280}
                             height={70}

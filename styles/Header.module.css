@@ -1,12 +1,12 @@
 .fondoimagen {
     position: relative;
     width: 100%;
-    height: 80rem;
+    height: 40rem;
 }
 
-@media (max-width:768px) {
+@media (min-width:768px) {
     .fondoimagen {
-        height: 40rem;
+        height: 80rem;
     }
 }
 .fondoContenido {
@@ -24,39 +24,41 @@
 }
 
 .contenido {
-    margin-bottom: 18%;
+    margin-bottom: 22%;
 }
 
 .contenido h1 {
-    font-size: 6.4rem;
-    margin: 0;
+    font-size: 3.6rem;
+    margin: 0 0 .5rem 0;
+    line-height: 1;
 }
-@media (max-width:768px) {
+@media (min-width:768px) {
     .contenido h1 {
-        font-size: 3.6rem;
-        margin-bottom: 1rem;
+        font-size: 6.4rem;
     }
 }
 .contenido h2 {
-    font-size: 5.2rem;
-    margin: 0;
+    
+    font-size: 3rem;
+    margin: 0 0 .5rem 0;
     color: var(--secondary)
 }
-@media (max-width:768px) {
+@media (min-width:768px) {
     .contenido h2 {
-        font-size: 3rem;
-        margin-bottom: 1rem;
+        font-size: 5.2rem;
     }
 }
 .contenido p {
-    font-size: 3rem;
+    font-size: 2rem;
     margin: 0;
-    max-width: 40rem;
+    max-width: 30rem;
     margin: 0 auto;
+    line-height: 1.2;
 }
-@media (max-width:768px) {
+@media (min-width:768px) {
     .contenido p {
-        font-size: 2rem;
-        max-width: 30rem;
+        font-size: 3rem;
+        max-width: 40rem;
+        
     }
 }

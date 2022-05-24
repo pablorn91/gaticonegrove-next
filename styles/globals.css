@@ -21,8 +21,21 @@ body {
 img {
   max-width: 100%;
 }
+
+h2 {
+  color: var(--primary);
+  font-size: 3rem;
+  font-weight: 700;
+}
+@media (min-width:768px) {
+  h2 {
+    font-size: 5.2rem;
+  }
+}
+
 a {
   color: var(--blanco);
+  font-size: 1.7rem;
   text-decoration: none;
   font-weight: 700;
 }
@@ -36,4 +49,14 @@ a {
   max-width: 120rem;
   margin: 0 auto;
   width: 95%;
+}
+
+/*Scroll con el menú móvil*/
+.noScroll {
+     overflow-y: hidden;
+}
+@media (min-width:768px) {
+  .noScroll {
+    overflow-y: scroll;
+  }
 }
