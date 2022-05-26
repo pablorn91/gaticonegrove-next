@@ -2,12 +2,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 3rem 0;
+    padding: 3rem 0;
 }
 
 .logo {
     min-width: 100px;
     padding: 0 2rem;
+}
+.logo:hover {
+    cursor: pointer;
 }
 @media (min-width: 992px) {
     .logo {
@@ -21,15 +24,15 @@
 }
 
 .navegacion a {
-    padding-right: 2rem;
+    margin-right: 2rem;
 }
 @media (min-width:992px) {
     .navegacion a {
-        padding-right: 4rem;
+        margin-right: 4rem;
     }
 }
 .navegacion a:last-of-type {
-    padding-right: 0;
+    margin-right: 0;
 }
 
 .iconContenedor {
@@ -78,7 +81,9 @@
         padding-left: 3rem;
     }
 }
-
+.active, .enlaces a:hover, .menuMovil a:hover {
+    border-bottom: 2px solid #c2c2c2;
+ }
 .burgerMenu {
     display: block;
     width: 50px;
@@ -130,7 +135,7 @@
     }
 }
 .contenedorMenuMovil {
-    background-color: var(--secondary);
+    background-color: var(--primary);
     width: 80%;
     height: 100vh;
     position: absolute;
@@ -163,9 +168,10 @@
     margin: 9rem 0;
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 .menuMovil a {
-    margin-bottom: 4rem;
+    margin: 0 auto 4rem auto;
 }
 .busquedaMenuMovil input, .busquedaMenuMovil svg {
     height: 30px;
@@ -178,12 +184,13 @@
     padding: 0 2rem;
 }
 .busquedaMenuMovil input {
+    background-color: var(--blanco);
     width: 100%;
     border: none;
     border-radius: 5px 0 0 5px;
 }
 .iconoBusquedaMenuMovil {
-    background-color: var(--primary);
+    background-color: #c1c1c1;
     width: 60px;
     height: 30px;
     border-radius: 0 5px 5px 0;

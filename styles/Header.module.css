@@ -4,6 +4,13 @@
     height: 40rem;
 }
 
+.fondoSinImagen {
+    background-color: var(--primary);
+    width: 100%;
+    height: 100%;
+    color: var(--blanco);
+}
+
 @media (min-width:768px) {
     .fondoimagen {
         height: 80rem;
