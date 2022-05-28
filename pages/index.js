@@ -1,7 +1,8 @@
 import Layout from "../components/Layout"
 import Destacados from "../components/Destacados";
+import Listado from "../components/Listado";
 
-export default function Home({headerProps, destacadosProps}) {
+export default function Home({headerProps, destacadosProps, productosProps}) {
   
 
   return (
@@ -10,10 +11,15 @@ export default function Home({headerProps, destacadosProps}) {
         pagina='Inicio'
         headerProps={headerProps}
       >
-          <main>
+          <main className='contenedor'>
 
             <Destacados
               destacadosProps={destacadosProps}
+            />
+
+            <h2>Lo nuevo</h2>
+            <Listado
+              productosProps={productosProps}
             />
 
           </main>
@@ -26,15 +32,18 @@ export default function Home({headerProps, destacadosProps}) {
 
    const urlHeader = `${process.env.API_URL}/header`;
    const urlDestacado = `${process.env.API_URL}/destacado`;
+   const urlProductos = `${process.env.API_URL}/productos?_limit=3&_sort=createdAt:desc`;
 
-   const [ resHeader, resDestacado ] = await Promise.all([
+   const [ resHeader, resDestacado, resProductos ] = await Promise.all([
      fetch(urlHeader),
-     fetch(urlDestacado)
+     fetch(urlDestacado),
+     fetch(urlProductos)
    ])
 
-   const [headerProps , destacadosProps ] = await Promise.all([
+   const [headerProps , destacadosProps, productosProps ] = await Promise.all([
      resHeader.json(),
-     resDestacado.json()
+     resDestacado.json(),
+     resProductos.json()
    ])
 
   //  const response = await fetch(urlHeader)
@@ -43,7 +52,8 @@ export default function Home({headerProps, destacadosProps}) {
    return {
      props: {
       headerProps,
-      destacadosProps
+      destacadosProps,
+      productosProps
      }
    }
 

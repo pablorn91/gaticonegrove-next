@@ -81,6 +81,9 @@
         padding-left: 3rem;
     }
 }
+.active {
+    color: #c2c2c2;
+}
 .active, .enlaces a:hover, .menuMovil a:hover {
     border-bottom: 2px solid #c2c2c2;
  }

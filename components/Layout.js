@@ -6,7 +6,7 @@ function Layout({children,pagina, headerProps}) {
   return (
     <>
         <Head>
-            <title>{`Gatico Negro Venezuela - ${pagina}`}</title>
+            <title>{`Gatico Negro Vzla - ${pagina}`}</title>
             <meta name="description" content="Gatico Negro Franelas y estampados" />
             <link rel="icon" href="/favicon.png" />
         </Head>

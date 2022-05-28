@@ -1,0 +1,22 @@
+.coleccion {
+    margin-bottom: 5rem;
+}
+
+.coleccion h3 {
+    text-align: center;
+    margin: 0;
+
+}
+
+@media (min-width:768px) {
+    .coleccion h3 {
+        font-size: 3rem;
+    }
+}
+
+.coleccion img {
+    transition: transform .3s ease;
+}
+.coleccion img:hover {
+    transform: scale(1.2);
+}

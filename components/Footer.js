@@ -13,13 +13,14 @@ function Footer() {
             <nav className={styles.navegacionFooter}>
                 <div className={styles.logo}>
                 <Link href='/'>
-
-                    <Image 
-                        width={280}
-                        height={70}
-                        src="/img/logo.svg" 
-                        alt={'Logo Gatico Negro'} 
-                    /> 
+                    <a>
+                        <Image 
+                            width={280}
+                            height={70}
+                            src="/img/logo.svg" 
+                            alt={'Logo Gatico Negro'} 
+                        /> 
+                    </a>
                 </Link>
                 </div>
                 <div className={styles.enlaces}>

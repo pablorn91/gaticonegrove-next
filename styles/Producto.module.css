@@ -1,0 +1,18 @@
+.producto {
+    text-align: center;
+}
+.producto img {
+    transition: transform .3s ease;
+}
+.producto img:hover {
+    transform: scale(1.5);
+}
+.producto h3 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+.precio {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+}

@@ -16,11 +16,9 @@ function Destacados({destacadosProps}) {
             textoBoton,
             enlaceBoton
     } = destacadosProps;
-
-  console.log(destacadosProps)
   return (
     <div className={styles.wrapDestacados}>
-        <section className={`${styles.destacados} contenedor`}>
+        <section className={styles.destacados}>
           <div className={styles.contenidoDestacado}>
               <h2>{titulo}</h2>
 

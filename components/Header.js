@@ -13,6 +13,7 @@ function Header({headerProps}) {
                  layout='fill'
                  objectFit='cover'
                  objectPosition='top'
+                 priority={true}
                  src={imagen.url} 
                  alt={`Imagen header ${titulo}`} 
              /> 
