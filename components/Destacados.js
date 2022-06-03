@@ -24,23 +24,31 @@ function Destacados({destacadosProps}) {
 
               <div className={styles.imagesPrimaryGrid}>
                   <div className={styles.imagesSecondaryGrid}>
+                   
+                    <Link href={enlace1}>
+                      <a className={styles.image1}>
+                          <img src={imagen1.url} alt='Imagen destacada'/>
+                      </a>
+                    </Link>
 
-                    <a className={styles.image1}>
-                        <img src={imagen1.url} alt='Imagen destacada'/>
-                    </a>
+                    <Link href={enlace2}>
+                      <a className={styles.image2}>
+                          <img src={imagen2.url} alt='Imagen destacada'/>
+                      </a>
+                    </Link>
 
-                    <a className={styles.image2}>
-                        <img src={imagen2.url} alt='Imagen destacada'/>
-                    </a>
-
-                    <a className={styles.image3}>
-                        <img src={imagen3.url} alt='Imagen destacada'/>
-                    </a>
+                    <Link href={enlace3}>
+                      <a className={styles.image3}>
+                          <img src={imagen3.url} alt='Imagen destacada'/>
+                      </a>
+                    </Link>
 
                   </div>
-                  <a className={styles.image4}>
+                  <Link href={enlace4}>
+                    <a className={styles.image4}>
                         <img src={imagen4.url} alt='Imagen destacada'/>
                     </a>
+                  </Link>
               </div>
 
               <Link  href={enlaceBoton}> 

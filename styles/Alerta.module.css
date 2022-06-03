@@ -1,0 +1,16 @@
+.alerta {
+    text-align: center;
+    width: 95%;
+    max-width: 50rem;
+    margin: 2rem auto;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    color: var(--blanco);
+}
+
+.error {
+    background-color: rgb(255, 100, 100);
+}
+.aviso {
+    background-color: var(--secondary);
+}

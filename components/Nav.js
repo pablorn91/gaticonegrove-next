@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import {
   HiOutlineSearch,
+  HiOutlineUserCircle,
   HiOutlineHeart,
   HiOutlineShoppingBag,
   HiMenu,
@@ -33,7 +34,9 @@ const Nav = () => {
     <div className="contenedor">
       <nav className={styles.navegacionContenedor}>
         <div className={styles.burgerMenu}>
-          <HiMenu />
+          <div className={styles.menuIcon}>
+             <HiMenu />
+          </div>
           <input
             type="checkbox"
             className={styles.inputMenu}
@@ -44,13 +47,14 @@ const Nav = () => {
           <div className={styles.contenedorMenuMovil}>
             <div className={styles.cerrarMenuMovil}>
               <HiX />
-            </div>
+            
             <input
               type="checkbox"
               className={styles.inputCerrarMenu}
               checked={isChecked}
               onChange={handleOnChange}
             />
+            </div>
             <div className={styles.menuMovil}>
               <div className={styles.busquedaMenuMovil}>
                 <input type="text" />
@@ -83,6 +87,15 @@ const Nav = () => {
                   Personalizar
                 </a>
               </Link>
+              <Link href='/mi-cuenta/acceder-registrarse'>
+                <a
+                  className={
+                    router.pathname == "/mi-cuenta/acceder-registrarse" ? styles.active : ""
+                  }
+                >
+                  Acceder / Registrarse 
+                </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -92,7 +105,7 @@ const Nav = () => {
            <a>
               <Image
                   width={280}
-                  height={70}
+                  height={80}
                   src="/img/logo.svg"
                   alt={"Logo Gatico Negro"}
               />
@@ -130,6 +143,13 @@ const Nav = () => {
           <div className={styles.iconContenedor}>
             <div className={styles.icono}>
               <HiOutlineSearch />
+            </div>
+            <div className={styles.icono}>
+              <Link href='/mi-cuenta/acceder-registrarse'>
+                <a>
+                  <HiOutlineUserCircle />
+                </a>
+              </Link>
             </div>
             <div className={styles.icono}>
               <HiOutlineHeart />

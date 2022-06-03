@@ -1,12 +1,13 @@
 .listado {
     display: grid;
     gap: 4rem;
-    margin: 5rem 0;
+    margin: 5rem 8rem;
 }
 
 @media (min-width:768px) {
     .listado {
         grid-template-columns: repeat(2,1fr);
+        margin: 5rem 0;
     }
 }
 @media (min-width:992px) {

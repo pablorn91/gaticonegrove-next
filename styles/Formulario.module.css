@@ -1,0 +1,58 @@
+.formulario {
+    background-color: var(--blanco);
+    width: 95%;
+    margin: 0 auto 10rem auto;
+    max-width: 50rem;
+    padding: 2rem;
+    box-shadow: 0 2px 5px rgba(30, 30, 30, 0.3);
+    border-radius: .5rem;
+}
+
+.formulario:first-of-type {
+    margin: 0 auto;
+}
+
+.campo {
+  margin-bottom: 2rem;
+}
+.campo label {
+    display: block;
+    margin: 0 auto;
+    width: 95%;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+}
+.campo input {
+    display: block;
+    margin: 0 auto;
+    width: 95%;
+    height: 4rem;
+    border: none;
+    background-color: var(--gris);
+    border-radius: .5rem;
+    color: var(--primary);
+}
+.boton {
+    background-color: var(--primary);
+    border: none;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    border-radius: .5rem;
+    display: block;
+    margin: 3rem auto 1rem auto;
+    width: 75%;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.boton:hover {
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+.olvideLink {
+    color: var(--primary);
+    text-align: center;
+    cursor: pointer;
+    font-weight: 700;
+}

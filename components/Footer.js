@@ -52,7 +52,7 @@ function Footer() {
                 </div>
             </nav>
             
-            <p className={styles.copyrights}>© 2015 Gatico Negro. Todos los derechos reservados</p>
+            <p className={styles.copyrights}>© 2015-2022 Gatico Negro. Todos los derechos reservados</p>
         </div>
     </footer>
   )

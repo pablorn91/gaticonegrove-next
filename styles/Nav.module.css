@@ -6,7 +6,7 @@
 }
 
 .logo {
-    min-width: 100px;
+    min-width: 150px;
     padding: 0 2rem;
 }
 .logo:hover {
@@ -23,15 +23,15 @@
     justify-content: space-between;
 }
 
-.navegacion a {
+.navegacion .enlaces  a {
     margin-right: 2rem;
 }
 @media (min-width:992px) {
-    .navegacion a {
+    .navegacion .enlaces a {
         margin-right: 4rem;
     }
 }
-.navegacion a:last-of-type {
+.navegacion .enlaces a:last-of-type {
     margin-right: 0;
 }
 
@@ -45,17 +45,29 @@
     align-items: center;
     padding-right: 1rem;
 }
+.icono a {
+    display: flex;
+    align-items: center;
+}
 .icono:last-of-type {
     padding-right: 0;
 }
-
+.icono svg:hover {
+    stroke: var(--secondary);
+    cursor: pointer;
+}
 .icono svg {
     stroke: var(--blanco);
-    font-size: 3.5rem;
+    font-size: 3.3rem;
+}
+@media (min-width:768px) {
+    .icono svg {
+        font-size: 3.8rem;
+    }
 }
 
 .enlaces,
-.icono:first-of-type {
+.icono:first-of-type, .icono:nth-child(2) {
     display: none;
 }
 
@@ -74,7 +86,7 @@
         display: block;
     }
     
-    .icono:first-of-type {
+    .icono:first-of-type, .icono:nth-child(2) {
         display: flex;
     }
     .iconContenedor {
@@ -82,16 +94,18 @@
     }
 }
 .active {
-    color: #c2c2c2;
+    color: var(--secondary);
 }
 .active, .enlaces a:hover, .menuMovil a:hover {
-    border-bottom: 2px solid #c2c2c2;
+    color: var(--secondary);
+    border-bottom: 2px solid var(--secondary);
  }
 .burgerMenu {
     display: block;
     width: 50px;
     height: 38px;
 }
+
 .burgerMenu .inputMenu {
     display: block;
     width: 50px;
@@ -104,9 +118,13 @@
 .burgerMenu svg {
     display: block;
     position: absolute;
-    width: 50px;
-    height: 38px;
+    font-size: 3.3rem;
 }
+
+.burgerMenu:hover .menuIcon svg {
+    fill: var(--secondary);
+}
+
 .burgerMenu .inputMenu+div {
     display: none;
     background-color: rgba(0, 0, 0, 0.5);
@@ -157,11 +175,19 @@
 .cerrarMenuMovil svg {
     width: 50px;
     height: 40px;
+
 }
+
+.cerrarMenuMovil:hover svg {
+   fill: var(--secondary);
+
+}
+
 .inputCerrarMenu {
     position: absolute;
     top: 0;
     right: 0;
+    transform: translateX(50px);
     width: 50px;
     height: 40px;
     cursor: pointer;

@@ -42,7 +42,8 @@
     
 }
 .enlaces a:hover {
-    border-bottom: 2px solid #c2c2c2;
+    color: var(--secondary);
+    border-bottom: 2px solid var(--secondary);
 }
 .enlaces a:last-of-type {
     margin-bottom: 0;
@@ -60,8 +61,8 @@
 }
 
 .active {
-    color: #c2c2c2;
-    border-bottom: 2px solid #c2c2c2;
+    color: var(--secondary);
+    border-bottom: 2px solid var(--secondary);
  }
 .copyrights {
     color: var(--blanco);
