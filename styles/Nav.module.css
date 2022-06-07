@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 3rem 0;
+    padding:  1rem 0;
 }
 
 .logo {
@@ -23,12 +23,16 @@
     justify-content: space-between;
 }
 
-.navegacion .enlaces  a {
+ .enlaces a, .menuMovil a {
     margin-right: 2rem;
+    color: var(--blanco);
+    font-size: 1.7rem;
+    font-weight: 700;
 }
 @media (min-width:992px) {
-    .navegacion .enlaces a {
+     .enlaces a, .menuMovil a {
         margin-right: 4rem;
+        font-size: 1.9rem;
     }
 }
 .navegacion .enlaces a:last-of-type {
@@ -56,13 +60,17 @@
     stroke: var(--secondary);
     cursor: pointer;
 }
+
+.activeIcon svg {
+    stroke: var(--secondary) !important;
+}
 .icono svg {
     stroke: var(--blanco);
-    font-size: 3.3rem;
+    font-size: 2.8rem;
 }
 @media (min-width:768px) {
     .icono svg {
-        font-size: 3.8rem;
+        font-size: 3.2rem;
     }
 }
 
@@ -93,11 +101,9 @@
         padding-left: 3rem;
     }
 }
-.active {
-    color: var(--secondary);
-}
+
 .active, .enlaces a:hover, .menuMovil a:hover {
-    color: var(--secondary);
+    color: var(--secondary) !important;
     border-bottom: 2px solid var(--secondary);
  }
 .burgerMenu {
@@ -108,7 +114,7 @@
 
 .burgerMenu .inputMenu {
     display: block;
-    width: 50px;
+    width: 40px;
     height: 38px;
     position:absolute;
     cursor: pointer;  
@@ -118,7 +124,7 @@
 .burgerMenu svg {
     display: block;
     position: absolute;
-    font-size: 3.3rem;
+    font-size: 2.8rem;
 }
 
 .burgerMenu:hover .menuIcon svg {
@@ -226,6 +232,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/*SALUDO USUARIO AUTENTICADO*/
+
+.saludoAutenticado {
+    color: var(--blanco);
+    margin: 0 0 0 1rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
 }
 
 

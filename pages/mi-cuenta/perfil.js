@@ -26,12 +26,14 @@ const Perfil = () => {
     pagina='Perfil'
     headerProps={false}
     >
-        {Object.values(auth).length === 0 || loading ? <Spinner/> :(
-
-        <h2>Perfil</h2>
+        {Object.values(auth).length === 0 ? <Spinner/> :(
+        <>
+          <h2>Perfil</h2>
+          <p>Hola {auth.name}</p>
+          <button onClick={logout}>Salir</button>
+        </>
         )}
       
-        <button onClick={logout}>Salir</button>
 
     </Layout>
   )

@@ -17,6 +17,7 @@ export default function AccederRegistrar() {
   });
   const [ newUser, setNewUser ] = useState({
     newName: '',
+    newLastnames: '',
     newEmail: '',
     newPassword: '',
     repetirPassword: ''
@@ -24,7 +25,7 @@ export default function AccederRegistrar() {
 
   const [ alerta, setAlerta ] = useState({})
 
-  const { auth ,setAuth, loading } = useAuth();
+  const { auth ,setAuth, loading, setLoading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -67,10 +68,22 @@ export default function AccederRegistrar() {
         return;
       }
 
+      if (newUser.newName.length > 20 ) {
+        setAlerta({
+          msg: 'El Nombre es muy Largo',
+          error: true
+        })
+        setTimeout(() => {
+          setAlerta({})
+        }, 3000);
+        return;
+      }
+
       createUser();
 
       setNewUser({
         newName: '',
+        newLastnames: '',
         newEmail: '',
         newPassword: '',
         repetirPassword: ''
@@ -107,7 +120,7 @@ export default function AccederRegistrar() {
   }
 
   const loginUser = async () => {
-    
+      setLoading(true)
     try {
         const { data } = await axios.post('http://localhost:1337/auth/local', {
         identifier: user.email,
@@ -120,6 +133,7 @@ export default function AccederRegistrar() {
          id : data.user.id,
          name : data.user.name,
          email : data.user.email,
+         lastnames: data.user.lastnames
        })
        setAlerta({
         msg: 'Accediendo... ',
@@ -129,15 +143,17 @@ export default function AccederRegistrar() {
     } catch (error) {
       console.log(error)
     }
-
+    setLoading(false)
     
   }
 
   const createUser = async () => {
+    setLoading(true)
    await axios
       .post('http://localhost:1337/auth/local/register', {
         name: newUser.newName,
-        username: newUser.newEmail.split('@')[0],
+        lastnames: newUser.newLastnames,
+        username: newUser.newEmail,
         email: newUser.newEmail,
         password: newUser.newPassword,
       })
@@ -149,6 +165,7 @@ export default function AccederRegistrar() {
         setAuth({
           id : response.data.user.id,
           name : response.data.user.name,
+          lastnames : response.data.user.lastnames,
           email : response.data.user.email,
         })
 
@@ -166,6 +183,7 @@ export default function AccederRegistrar() {
         })
         console.log('An error occurred:', error.response.data.message[0].messages[0].message);
       });
+      setLoading(false)
   }
 
     const { msg, login } = alerta;
@@ -176,7 +194,7 @@ export default function AccederRegistrar() {
         headerProps={false}
       >
 
-        {Object.values(auth).length !== 0 || loading ? <Spinner/> 
+        {Object.values(auth).length !== 0 ? <Spinner/> 
         :(<>
         
           <h2>Acceder</h2>
@@ -236,9 +254,21 @@ export default function AccederRegistrar() {
                   <input
                       id='newName'
                       type='text'
-                      placeholder='Nombre de Usuario'
+                      placeholder='Tu Nombre'
                       name='newName'
                       value={newUser.newName}
+                      onChange={ e => {handleOnChangeNewUser(e)}}
+                  />
+              </div>
+
+              <div className={styles.campo}>
+                  <label htmlFor='newLastnames'>Apellidos:</label>
+                  <input
+                      id='newLastnames'
+                      type='text'
+                      placeholder='Tus Apellidos'
+                      name='newLastnames'
+                      value={newUser.newLastnames}
                       onChange={ e => {handleOnChangeNewUser(e)}}
                   />
               </div>

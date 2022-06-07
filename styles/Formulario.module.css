@@ -32,6 +32,18 @@
     border-radius: .5rem;
     color: var(--primary);
 }
+
+.campo input:-webkit-autofill,
+.campo input:-webkit-autofill:hover, 
+.campo input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px var(--gris) inset;
+    box-shadow: 0 0 0px 1000px var(--gris) inset;
+}
+
+.campo input:-webkit-autofill {
+    -webkit-text-fill-color: var(--primary);
+}
+
 .boton {
     background-color: var(--primary);
     border: none;

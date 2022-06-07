@@ -31,6 +31,7 @@ const AuthProvider = ({children}) => {
                     id : data.id,
                     name : data.name,
                     email : data.email,
+                    lastnames : data.lastnames
                   })
                 console.log(data);
            } catch (error) {
@@ -48,7 +49,8 @@ const AuthProvider = ({children}) => {
             value={{
                 auth,
                 setAuth,
-                loading
+                loading,
+                setLoading
             }}
         >
             {children}

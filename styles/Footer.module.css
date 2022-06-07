@@ -39,10 +39,13 @@
     display: block;
     text-align: center;
     margin-bottom: 3rem;
+    color: var(--blanco);
+    font-size: 1.7rem;
+    font-weight: 700;
     
 }
-.enlaces a:hover {
-    color: var(--secondary);
+.enlaces a:hover, .active {
+    color: var(--secondary) !important;
     border-bottom: 2px solid var(--secondary);
 }
 .enlaces a:last-of-type {
@@ -60,10 +63,6 @@
     margin-right: 0;
 }
 
-.active {
-    color: var(--secondary);
-    border-bottom: 2px solid var(--secondary);
- }
 .copyrights {
     color: var(--blanco);
     text-align: center;

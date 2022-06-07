@@ -10,12 +10,15 @@ import {
   HiMenu,
   HiX,
 } from "react-icons/hi";
+import useAuth from "../hooks/useAuth";
 import styles from "../styles/Nav.module.css";
 
 const Nav = () => {
   const router = useRouter();
 
   const [isChecked, setIsChecked] = useState(false);
+
+  const { auth } = useAuth();
 
   const handleOnChange = () => {
     setIsChecked(!isChecked);
@@ -32,7 +35,9 @@ const Nav = () => {
 
   return (
     <div className="contenedor">
+      
       <nav className={styles.navegacionContenedor}>
+      
         <div className={styles.burgerMenu}>
           <div className={styles.menuIcon}>
              <HiMenu />
@@ -87,15 +92,29 @@ const Nav = () => {
                   Personalizar
                 </a>
               </Link>
-              <Link href='/mi-cuenta/acceder-registrarse'>
+
+              {Object.values(auth).length === 0 ? (
+                  <Link href='/mi-cuenta/acceder-registrarse'>
+                  <a
+                    className={
+                      router.pathname == "/mi-cuenta/acceder-registrarse" ? styles.active : ""
+                    }
+                  >
+                    Acceder / Registrarse 
+                  </a>
+                </Link>
+              ): (
+                <Link href='/mi-cuenta/perfil'>
                 <a
                   className={
-                    router.pathname == "/mi-cuenta/acceder-registrarse" ? styles.active : ""
+                    router.pathname == "/mi-cuenta/perfil" ? styles.active : ""
                   }
                 >
-                  Acceder / Registrarse 
+                  Mi Cuenta 
                 </a>
               </Link>
+              )}
+              
             </div>
           </div>
         </div>
@@ -105,7 +124,7 @@ const Nav = () => {
            <a>
               <Image
                   width={280}
-                  height={80}
+                  height={50}
                   src="/img/logo.svg"
                   alt={"Logo Gatico Negro"}
               />
@@ -145,11 +164,24 @@ const Nav = () => {
               <HiOutlineSearch />
             </div>
             <div className={styles.icono}>
-              <Link href='/mi-cuenta/acceder-registrarse'>
-                <a>
+              {Object.values(auth).length === 0 ? (
+                <Link href='/mi-cuenta/acceder-registrarse'>
+                <a className={
+                  router.pathname == "/mi-cuenta/acceder-registrarse" ? styles.activeIcon : ""
+                }>
                   <HiOutlineUserCircle />
                 </a>
               </Link>
+              ): (
+                <Link href='/mi-cuenta/perfil'>
+                <a className={
+                  router.pathname == "/mi-cuenta/perfil" ? styles.activeIcon : ""
+                }>
+                  <HiOutlineUserCircle />
+                </a>
+              </Link>
+              ) }
+              
             </div>
             <div className={styles.icono}>
               <HiOutlineHeart />
@@ -157,9 +189,13 @@ const Nav = () => {
             <div className={styles.icono}>
               <HiOutlineShoppingBag />
             </div>
+            {Object.values(auth).length !== 0 && 
+           <p className={styles.saludoAutenticado}>Hola, {auth.name}</p> }
           </div>
+          
         </div>
       </nav>
+      
     </div>
   );
 };
