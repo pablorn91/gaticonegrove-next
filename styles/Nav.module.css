@@ -83,15 +83,12 @@
     padding-left: 3rem;
 }
 
-@media (min-width:992px) {
-    .enlaces {
-        padding-left: 0;
-    }
-}
+
 
 @media (min-width:768px) {
     .enlaces {
-        display: block;
+        display: flex;
+        align-items: center;
     }
     
     .icono:first-of-type, .icono:nth-child(2) {
@@ -176,12 +173,10 @@
   position: absolute;
   top: 0;
   right: 0;
-  transform: translateX(-50px);
+  transform: translateX(-40px);
 }
 .cerrarMenuMovil svg {
-    width: 50px;
-    height: 40px;
-
+    font-size: 3rem;
 }
 
 .cerrarMenuMovil:hover svg {

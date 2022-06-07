@@ -13,7 +13,7 @@ import {
 import useAuth from "../hooks/useAuth";
 import styles from "../styles/Nav.module.css";
 
-const Nav = () => {
+const Nav = ({changeOpenCartSiderbar}) => {
   const router = useRouter();
 
   const [isChecked, setIsChecked] = useState(false);
@@ -184,9 +184,19 @@ const Nav = () => {
               
             </div>
             <div className={styles.icono}>
-              <HiOutlineHeart />
+              <Link href='/favoritos'>
+                <a className={
+                  router.pathname == "/favoritos" ? styles.activeIcon : ""
+                }>
+                   <HiOutlineHeart />
+                </a>
+              </Link>
+             
             </div>
-            <div className={styles.icono}>
+            <div
+              onClick={changeOpenCartSiderbar}
+              className={styles.icono}
+            >
               <HiOutlineShoppingBag />
             </div>
             {Object.values(auth).length !== 0 && 

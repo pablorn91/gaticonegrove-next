@@ -68,7 +68,7 @@ export default function AccederRegistrar() {
         return;
       }
 
-      if (newUser.newName.length > 20 ) {
+      if (newUser.newName.length > 15 ) {
         setAlerta({
           msg: 'El Nombre es muy Largo',
           error: true
@@ -122,7 +122,7 @@ export default function AccederRegistrar() {
   const loginUser = async () => {
       setLoading(true)
     try {
-        const { data } = await axios.post('http://localhost:1337/auth/local', {
+        const { data } = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/local`, {
         identifier: user.email,
         password: user.password,
       });
@@ -150,7 +150,7 @@ export default function AccederRegistrar() {
   const createUser = async () => {
     setLoading(true)
    await axios
-      .post('http://localhost:1337/auth/local/register', {
+      .post(`${process.env.NEXT_PUBLIC_API_URL}/auth/local/register`, {
         name: newUser.newName,
         lastnames: newUser.newLastnames,
         username: newUser.newEmail,

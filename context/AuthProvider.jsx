@@ -20,7 +20,7 @@ const AuthProvider = ({children}) => {
             }
 
            try {
-            const { data } = await axios.get(`http://localhost:1337/users/${parseJwt(token).id}`, {
+            const { data } = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/users/${parseJwt(token).id}`, {
                 headers: {
                     Authorization:
                     `Bearer ${token}`,

@@ -53,6 +53,10 @@ a {
 .noScroll {
      overflow-y: hidden;
 }
+.noScrollCart {
+  overflow-y: hidden !important;
+}
+
 @media (min-width:768px) {
   .noScroll {
     overflow-y: scroll;
