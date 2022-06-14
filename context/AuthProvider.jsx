@@ -8,6 +8,7 @@ const AuthProvider = ({children}) => {
 
     const [ auth, setAuth ] = useState({})
     const [ loading, setLoading ] = useState(true)
+    const [ cart, setCart ] = useState([])
 
     useEffect(() => {
         const autenticarUsuario = async () => {
@@ -33,10 +34,14 @@ const AuthProvider = ({children}) => {
                     email : data.email,
                     lastnames : data.lastnames
                   })
-                console.log(data);
+                    const DbCart = data.shoppingCart ?? [];
+                    setCart(DbCart)
+               
+               
            } catch (error) {
             console.log(error);
             setAuth({})
+            setCart([])
            }
            setLoading(false)
  
@@ -44,13 +49,59 @@ const AuthProvider = ({children}) => {
         autenticarUsuario();
     }, [])
 
+    useEffect(() => {
+        const updateCartInDB = () => {
+
+            const token = localStorage.getItem('token')
+            
+            if (!token) {
+                return
+            }
+
+            if (cart.length === 0) return
+
+            try {
+                axios.put(`${process.env.NEXT_PUBLIC_API_URL}/users/${parseJwt(token).id}`,   {
+                shoppingCart: cart
+              },{
+                headers: {
+                    Authorization:
+                    `Bearer ${token}`,
+                },
+                
+              })  
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        updateCartInDB()
+    }, [cart])
+
+    const addToCart = product => {
+
+
+        if (cart.some( item =>  item.id === product.id && item.corte === product.corte && item.talla === product.talla )) {
+            const  updatedCart = cart.map( item => {
+                if (item.id === product.id && item.corte === product.corte && item.talla === product.talla ) {
+                    item.cantidad = product.cantidad;
+                }
+                return item;
+            })
+            setCart(updatedCart)
+        } else {
+            setCart([...cart, product])
+        }
+    }
+
     return (
         <AuthContext.Provider
             value={{
                 auth,
                 setAuth,
                 loading,
-                setLoading
+                setLoading,
+                addToCart,
+                cart
             }}
         >
             {children}

@@ -15,6 +15,7 @@
     background-color: var(--blanco);
     width: 85%;
     height: 100vh;
+    padding: 2rem;
     position: absolute;
     top: 0;
     right: 0;
@@ -30,13 +31,65 @@
         width: 40%;
     }
 }
-.icono {
-    position: absolute;
-    right: 0;
-    padding: 1rem;
+
+.wrapCerrarCart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gris);
+}
+
+.icono {  
     cursor: pointer;
 }
 .icono svg {
     font-size: 3rem;
-    fill: var(--primary);
+    fill: var(--gris);
+}
+.wrapCerrarCart p {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    margin: 0;
+}
+
+.iconoCart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--gris);
+    width: 12rem;
+    height: 12rem;
+    margin: 4rem auto 0 auto;
+    border-radius: 50%;
+}
+.iconoCart svg {
+    font-size: 4rem;
+    stroke: var(--blanco)
+}
+.textoCarrito {
+    text-align: center;
+    margin: 4rem 0;
+}
+.accederRegistrarse {
+    color: var(--blanco);
+    background-color: var(--primary);
+    padding: 1rem 2rem;
+    font-weight: 700;
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: .5rem;
+    transition: all .3s ease;
+}
+.accederRegistrarse:hover {
+    color: var(--primary);
+    background-color: var(--secondary);
+}
+
+.listaProductosCarrito {
+    height: 90%;
+    overflow-y: auto;
+    
 }

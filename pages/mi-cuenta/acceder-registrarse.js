@@ -25,7 +25,7 @@ export default function AccederRegistrar() {
 
   const [ alerta, setAlerta ] = useState({})
 
-  const { auth ,setAuth, loading, setLoading } = useAuth();
+  const { auth ,setAuth, setLoading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -127,7 +127,6 @@ export default function AccederRegistrar() {
         password: user.password,
       });
 
-      console.log(data);
       localStorage.setItem('token', data.jwt)
        setAuth({
          id : data.user.id,

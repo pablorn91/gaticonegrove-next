@@ -1,0 +1,31 @@
+.productoCarrito {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    padding: 2rem 0;
+    gap: 1rem;
+    border-bottom: 1px solid var(--gris);
+}
+.productoCarrito:last-of-type {
+    border-bottom: none;
+}
+.titulo  {
+   margin: 0;
+   font-size: 1.5rem;
+   text-align: left;
+}
+
+.cantidadPrecio {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+.cantidadPrecio p {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.precio {
+    color: var(--primary);
+    font-weight: 700;
+    
+}
