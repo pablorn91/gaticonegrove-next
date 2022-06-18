@@ -13,12 +13,12 @@ import {
 import useAuth from "../hooks/useAuth";
 import styles from "../styles/Nav.module.css";
 
-const Nav = ({changeOpenCartSiderbar}) => {
+const Nav = () => {
   const router = useRouter();
 
   const [isChecked, setIsChecked] = useState(false);
 
-  const { auth } = useAuth();
+  const { auth, changeOpenCartSiderbar } = useAuth();
 
   const handleOnChange = () => {
     setIsChecked(!isChecked);

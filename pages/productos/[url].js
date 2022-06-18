@@ -98,6 +98,7 @@ function Producto({productoProp}) {
 
         //Crear datos para enviar a agregar al carrito
         const corte = damaCaballero ? 'Dama' : 'Caballero';
+        const productId = `${id}-${damaCaballero ? 'Dama' : 'Caballero'}-${color_franela.Color}-${tallaSelected}`;
         const SelectedProduct = {
             id,
             imagen: imagen[0].url,
@@ -106,7 +107,8 @@ function Producto({productoProp}) {
             color_franela: color_franela.Color,
             corte,
             talla: tallaSelected,
-            cantidad
+            cantidad,
+            productId
         }
 
         addToCart(SelectedProduct)

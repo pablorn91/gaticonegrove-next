@@ -3,16 +3,13 @@ import Image from "next/image"
 import Nav from "./Nav"
 import styles from '../styles/Header.module.css'
 import CartSidebar from "./CartSidebar";
+import useAuth from '../hooks/useAuth';
 
 function Header({headerProps}) {
 
-  const [ openCartSidebar, setOpenCartSidebar ] = useState(false);
-
    const { titulo, eslogan, parrafo, imagen } = headerProps;
-
-   const changeOpenCartSiderbar = () => {
-     setOpenCartSidebar(!openCartSidebar)
-   }
+   
+   const { openCartSidebar } = useAuth();
 
    useEffect(() => {
     const body = document.querySelector("body");
@@ -22,6 +19,7 @@ function Header({headerProps}) {
       body.classList.remove("noScrollCart");
     }
   }, [openCartSidebar]);
+
 
   return (
       <header>
@@ -40,9 +38,7 @@ function Header({headerProps}) {
                
    
                <div className={styles.fondoContenido}>
-                 <Nav
-                    changeOpenCartSiderbar={changeOpenCartSiderbar}
-                 />
+                 <Nav/>
                  <div className={`${styles.contenido} 'contenedor'`}>
                        <h1>{titulo}</h1>
                        <h2>{eslogan}</h2>
@@ -53,16 +49,12 @@ function Header({headerProps}) {
            </div>
         ): (
           <div className={styles.fondoSinImagen}>
-            <Nav
-                changeOpenCartSiderbar={changeOpenCartSiderbar}
-            />
+            <Nav/>
           </div>
         )}
-        
-      <CartSidebar
-        changeOpenCartSiderbar={changeOpenCartSiderbar}
-        openCartSidebar={openCartSidebar}
-      /> 
+      
+      
+      <CartSidebar/> 
         
       
       </header>

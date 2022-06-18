@@ -25,7 +25,7 @@ export default function AccederRegistrar() {
 
   const [ alerta, setAlerta ] = useState({})
 
-  const { auth ,setAuth, setLoading } = useAuth();
+  const { auth ,setAuth, setLoading, setCart } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -134,6 +134,8 @@ export default function AccederRegistrar() {
          email : data.user.email,
          lastnames: data.user.lastnames
        })
+       const DbCart = data.user.shoppingCart ?? [];
+       setCart(DbCart)
        setAlerta({
         msg: 'Accediendo... ',
         error: false,

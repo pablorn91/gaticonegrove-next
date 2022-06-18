@@ -8,6 +8,23 @@
 .productoCarrito:last-of-type {
     border-bottom: none;
 }
+
+
+.iconX {
+    float: right;
+    padding-left: 1rem;
+}
+.iconX:hover {
+    cursor: pointer;
+}
+.iconX svg {
+    font-size: 2rem;
+    fill: var(--gris);
+}
+.iconX svg:hover {
+    fill: var(--rojo);
+}
+
 .titulo  {
    margin: 0;
    font-size: 1.5rem;

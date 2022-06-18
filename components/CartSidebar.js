@@ -5,9 +5,9 @@ import { HiX, HiOutlineShoppingBag } from "react-icons/hi"
 import useAuth from '../hooks/useAuth'
 import styles from '../styles/CartSidebar.module.css'
 
-function CartSidebar({openCartSidebar,changeOpenCartSiderbar}) {
+function CartSidebar() {
 
-  const { auth, cart } = useAuth()
+  const { auth, cart, openCartSidebar, changeOpenCartSiderbar } = useAuth()
 
   return (
       
@@ -33,7 +33,7 @@ function CartSidebar({openCartSidebar,changeOpenCartSiderbar}) {
 
             </div>
 
-            {cart.length === 0 && (
+            {cart?.length === 0 && (
 
               <div className={styles.iconoCart}>
                 <HiOutlineShoppingBag/>
@@ -57,7 +57,7 @@ function CartSidebar({openCartSidebar,changeOpenCartSiderbar}) {
                   <div className={styles.listaProductosCarrito}>
                       {cart.map( product => (
                         <ProductoCarrito
-                          key={product.id}
+                          key={`${product.id}-${product.corte}-${product.color_franela}-${product.talla}`}
                           product={product}
                         />
                       ))}

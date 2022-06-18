@@ -8,7 +8,12 @@ const AuthProvider = ({children}) => {
 
     const [ auth, setAuth ] = useState({})
     const [ loading, setLoading ] = useState(true)
-    const [ cart, setCart ] = useState([])
+    const [ cart, setCart ] = useState(null)
+    const [ openCartSidebar, setOpenCartSidebar ] = useState(false);
+
+    const changeOpenCartSiderbar = () => {
+        setOpenCartSidebar(!openCartSidebar)
+      }
 
     useEffect(() => {
         const autenticarUsuario = async () => {
@@ -58,7 +63,7 @@ const AuthProvider = ({children}) => {
                 return
             }
 
-            if (cart.length === 0) return
+            if (cart === null) return
 
             try {
                 axios.put(`${process.env.NEXT_PUBLIC_API_URL}/users/${parseJwt(token).id}`,   {
@@ -91,6 +96,13 @@ const AuthProvider = ({children}) => {
         } else {
             setCart([...cart, product])
         }
+
+        changeOpenCartSiderbar()
+    }
+
+    const deleteProductCart = productId => {
+        const updatedCart= cart.filter( articulo => articulo.productId !== productId)
+        setCart(updatedCart)
     }
 
     return (
@@ -101,7 +113,11 @@ const AuthProvider = ({children}) => {
                 loading,
                 setLoading,
                 addToCart,
-                cart
+                deleteProductCart,
+                cart,
+                setCart,
+                openCartSidebar,
+                changeOpenCartSiderbar
             }}
         >
             {children}

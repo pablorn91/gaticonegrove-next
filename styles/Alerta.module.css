@@ -9,7 +9,7 @@
 }
 
 .error {
-    background-color: rgb(255, 100, 100);
+    background-color: var(--rojo);
 }
 .aviso {
     background-color: var(--secondary);

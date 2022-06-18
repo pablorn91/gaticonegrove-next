@@ -7,7 +7,7 @@ import Spinner from "../../components/Spinner"
 
 const Perfil = () => {
 
-    const { auth,setAuth, loading } = useAuth();
+    const { auth,setAuth, setCart } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
@@ -19,6 +19,7 @@ const Perfil = () => {
     const logout = () => {
         localStorage.removeItem('token')
         setAuth({})
+        setCart([])
     }
 
   return (
