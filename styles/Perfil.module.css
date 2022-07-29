@@ -1,0 +1,60 @@
+.titleWrapper {
+    width: 95%;
+    max-width: 55rem;
+    margin: 0 auto;
+}
+.title {
+    display: block;
+    width: max-content;
+    margin: 2rem 0 0 1rem;
+    padding: 0 2rem;
+    background-color: var(--primary);
+    color: var(--blanco);
+    border-radius: .5rem .5rem 0 0;
+    font-size: 1.6rem;
+}
+
+.datos {
+    background-color: var(--blanco);
+    max-width: 120rem;
+    margin: 0 auto 5rem auto;
+    padding: 2rem;
+    box-shadow: 0 2px 5px rgba(30, 30, 30, 0.3);
+    border-radius: .5rem;
+}
+.addAddress {
+    cursor: pointer;
+    float: right;
+    transform: translateY(-8px);
+}
+.addAddress svg {
+    fill: var(--primary);
+    font-size: 3rem;
+}
+
+.addAddress svg:hover {
+    fill: var(--secondary);
+}
+
+
+.logoutContenedor {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.botonLogout {
+    background-color: transparent;
+    color: var(--primary);
+    border: none;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    border-radius: .5rem;
+    display: inline;
+    margin: 3rem 0 1rem 0;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.botonLogout:hover {
+    color: var(--rojo);
+}

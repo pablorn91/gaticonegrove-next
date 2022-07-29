@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import Image from "next/image"
 import Nav from "./Nav"
 import styles from '../styles/Header.module.css'
