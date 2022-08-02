@@ -1,28 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Layout from "../../components/Layout";
 import useAuth from "../../hooks/useAuth";
 import { useRouter } from "next/router";
 import Spinner from "../../components/Spinner";
 import Alerta from "../../components/Alerta";
-import {
-  formulario,
-  campo,
-  dobleCampo,
-  boton,
-} from "../../styles/Formulario.module.css";
-import {
-  title,
-  titleWrapper,
-  datos,
-  addAddress,
-  botonLogout,
-  logoutContenedor,
-} from "../../styles/Perfil.module.css";
+import BasicModal from "../../components/BasicModal";
+import AddressForm from "../../components/AddressForm";
+import ListadoAddress from "../../components/ListadoAddress";
 import { HiPlus } from "react-icons/hi";
 import { parseJwt } from "../../helpers";
-import axios from "axios";
+import axiosClient from "../../config/axios";
+import stylesFormulario from "../../styles/Formulario.module.css";
+import stylesPerfil from "../../styles/Perfil.module.css";
+import { getAddressesApi } from "../../api/address";
 
-const Perfil = () => {
+export default function Perfil() {
   const { auth, setAuth, setCart } = useAuth();
   const router = useRouter();
 
@@ -116,15 +108,11 @@ const Perfil = () => {
     }
     if (newDates.email) newDates.username = newDates.email;
     try {
-      await axios.put(
-        `${process.env.NEXT_PUBLIC_API_URL}/users/${parseJwt(token).id}`,
-        newDates,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      await axiosClient.put(`/users/${parseJwt(token).id}`, newDates, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (newDates.password) delete newDates.password;
       if (newDates.username) delete newDates.username;
@@ -161,13 +149,13 @@ const Perfil = () => {
         <div className="contenedor">
           <h2>Perfil</h2>
           {msg && <Alerta alerta={alerta} />}
-          <div className={titleWrapper}>
-            <h3 className={title}>Tu datos</h3>
+          <div className={stylesPerfil.titleWrapper}>
+            <h3 className={stylesPerfil.title}>Tus datos</h3>
           </div>
-          <form className={formulario} onSubmit={handleSubmit}>
+          <form className={stylesFormulario.formulario} onSubmit={handleSubmit}>
             <label htmlFor="newName">Cambiar tu nombre y Apellidos:</label>
-            <div className={dobleCampo}>
-              <div className={campo}>
+            <div className={stylesFormulario.dobleCampo}>
+              <div className={stylesFormulario.campo}>
                 <input
                   id="newName"
                   type="text"
@@ -178,7 +166,7 @@ const Perfil = () => {
                 />
               </div>
 
-              <div className={campo}>
+              <div className={stylesFormulario.campo}>
                 <input
                   type="text"
                   placeholder="Tus nuevos apellidos"
@@ -189,7 +177,7 @@ const Perfil = () => {
               </div>
             </div>
 
-            <div className={campo}>
+            <div className={stylesFormulario.campo}>
               <label htmlFor="newEmail">
                 Cambiar tu Email (actual: {auth.email}):
               </label>
@@ -204,8 +192,8 @@ const Perfil = () => {
             </div>
 
             <label htmlFor="newPassword">Cambiar tu contraseña:</label>
-            <div className={dobleCampo}>
-              <div className={campo}>
+            <div className={stylesFormulario.dobleCampo}>
+              <div className={stylesFormulario.campo}>
                 <input
                   id="newPassword"
                   type="password"
@@ -216,7 +204,7 @@ const Perfil = () => {
                 />
               </div>
 
-              <div className={campo}>
+              <div className={stylesFormulario.campo}>
                 <input
                   type="password"
                   placeholder="Repetir contraseña"
@@ -227,19 +215,17 @@ const Perfil = () => {
               </div>
             </div>
 
-            <input type="submit" value="Guardar Cambios" className={boton} />
+            <input
+              type="submit"
+              value="Guardar Cambios"
+              className={stylesFormulario.boton}
+            />
           </form>
 
-          <div className={addAddress}>
-            <HiPlus />
-          </div>
-          <h3 className={title}>Tus direcciones</h3>
-          <div className={datos}>
-            <p>No hay direcciones, añade una pulsando +</p>
-          </div>
+          <Addresses />
 
-          <div className={logoutContenedor}>
-            <button className={botonLogout} onClick={logout}>
+          <div className={stylesPerfil.logoutContenedor}>
+            <button className={stylesPerfil.botonLogout} onClick={logout}>
               Cerrar Sesión
             </button>
           </div>
@@ -247,6 +233,88 @@ const Perfil = () => {
       )}
     </Layout>
   );
-};
+}
 
-export default Perfil;
+function Addresses() {
+  const [addresses, setAddresses] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+  const [titleModal, setTitleModal] = useState("");
+  const [formModal, setFormModal] = useState(null);
+  const handleOpen = (title) => {
+    setTitleModal(title);
+    setFormModal(
+      <AddressForm
+        isNewAddress={true}
+        handleClose={handleClose}
+        addAddress={addAddress}
+      />
+    );
+    setOpenModal(true);
+  };
+  const handleClose = () => setOpenModal(false);
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      const data = await getAddressesApi();
+      setAddresses(data);
+      setLoading(false);
+    })();
+  }, []);
+
+  useEffect(() => {
+    const updateAddressInDB = async () => {
+      const token = localStorage.getItem("token");
+
+      if (!token) {
+        return;
+      }
+
+      if (addresses === null) return;
+
+      try {
+        await axiosClient.put(
+          `/users/${parseJwt(token).id}`,
+          {
+            Addresses: addresses,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    updateAddressInDB();
+  }, [addresses]);
+
+  const addAddress = (address) => {
+    setAddresses([...addresses, address]);
+  };
+
+  return (
+    <>
+      <div
+        className={stylesPerfil.addAddress}
+        onClick={() => handleOpen("Añadir Dirección")}
+      >
+        <HiPlus />
+      </div>
+      <h3 className={stylesPerfil.title}>Tus direcciones</h3>
+      <div className={stylesPerfil.datos}>
+        <ListadoAddress
+          addresses={addresses}
+          setAddresses={setAddresses}
+          loading={loading}
+        />
+      </div>
+      <BasicModal open={openModal} handleClose={handleClose} title={titleModal}>
+        {formModal}
+      </BasicModal>
+    </>
+  );
+}

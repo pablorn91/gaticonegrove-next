@@ -32,6 +32,7 @@
     background-color: var(--gris);
     border-radius: .5rem;
     color: var(--primary);
+    padding: 0 1rem;
 }
 
 .campo input:-webkit-autofill,

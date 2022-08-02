@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import axios from "axios";
+import axiosClient from "../../config/axios";
 import Layout from "../../components/Layout";
 import Alerta from "../../components/Alerta";
 import Spinner from "../../components/Spinner";
@@ -29,7 +29,7 @@ export default function AccederRegistrar() {
 
   useEffect(() => {
     if (Object.values(auth).length !== 0) {
-      router.push("../tienda");
+      router.push("./perfil");
     }
   }, [auth]);
 
@@ -38,6 +38,53 @@ export default function AccederRegistrar() {
   };
   const handleOnChangeNewUser = (e) => {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmitLogin = (e) => {
+    e.preventDefault();
+    if (Object.values(user).length < 2 || Object.values(user).includes("")) {
+      setAlerta({
+        msg: "Todos los campos son obligatorios",
+        error: true,
+        login: true,
+      });
+      setTimeout(() => {
+        setAlerta({});
+      }, 3000);
+      return;
+    }
+    loginUser();
+
+    setUser({
+      email: "",
+      password: "",
+    });
+
+    setTimeout(() => {
+      setAlerta({});
+    }, 3000);
+  };
+
+  const loginUser = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axiosClient.post("/auth/local", {
+        identifier: user.email,
+        password: user.password,
+      });
+      localStorage.setItem("token", data.jwt);
+      setAuth({
+        id: data.user.id,
+        name: data.user.name,
+        email: data.user.email,
+        lastnames: data.user.lastnames,
+      });
+      const DbCart = data.user.shoppingCart ?? [];
+      setCart(DbCart);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
   };
 
   const handleSubmitNewUser = (e) => {
@@ -94,60 +141,10 @@ export default function AccederRegistrar() {
     }, 3000);
   };
 
-  const handleSubmitLogin = (e) => {
-    e.preventDefault();
-    if (Object.values(user).length < 2 || Object.values(user).includes("")) {
-      setAlerta({
-        msg: "Todos los campos son obligatorios",
-        error: true,
-        login: true,
-      });
-      setTimeout(() => {
-        setAlerta({});
-      }, 3000);
-      return;
-    }
-    loginUser();
-
-    setUser({
-      email: "",
-      password: "",
-    });
-
-    setTimeout(() => {
-      setAlerta({});
-    }, 3000);
-  };
-
-  const loginUser = async () => {
-    setLoading(true);
-    try {
-      const { data } = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/auth/local`,
-        {
-          identifier: user.email,
-          password: user.password,
-        }
-      );
-      localStorage.setItem("token", data.jwt);
-      setAuth({
-        id: data.user.id,
-        name: data.user.name,
-        email: data.user.email,
-        lastnames: data.user.lastnames,
-      });
-      const DbCart = data.user.shoppingCart ?? [];
-      setCart(DbCart);
-    } catch (error) {
-      console.log(error);
-    }
-    setLoading(false);
-  };
-
   const createUser = async () => {
     setLoading(true);
-    await axios
-      .post(`${process.env.NEXT_PUBLIC_API_URL}/auth/local/register`, {
+    await axiosClient
+      .post("/auth/local/register", {
         name: newUser.newName,
         lastnames: newUser.newLastnames,
         username: newUser.newEmail,
@@ -155,8 +152,6 @@ export default function AccederRegistrar() {
         password: newUser.newPassword,
       })
       .then((response) => {
-        console.log("User profile", response.data.user);
-        console.log("User token", response.data.jwt);
         localStorage.setItem("token", response.data.jwt);
         setAuth({
           id: response.data.user.id,
