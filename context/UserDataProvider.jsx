@@ -120,7 +120,11 @@ const UserDataProvider = ({ children }) => {
   };
 
   const addAddress = (address) => {
-    setAddresses([...addresses, address]);
+    if (addresses === null) {
+      setAddresses([addAddress]);
+    } else {
+      setAddresses([...addresses, address]);
+    }
     setReloadAddresses(true);
   };
 

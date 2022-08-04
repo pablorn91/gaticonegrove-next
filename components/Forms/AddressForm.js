@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Alerta from "./Alerta";
-import styles from "../styles/Formulario.module.css";
+import Alerta from "../Alerta";
+import styles from "../../styles/Formulario.module.css";
 
 export default function AddressForm({
   isNewAddress,

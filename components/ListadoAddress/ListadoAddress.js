@@ -5,7 +5,7 @@ export default function ListadoAddress({
   handleOpen,
   deleteAddress,
 }) {
-  return addresses?.length === 0 ? (
+  return addresses?.length === 0 || addresses === null ? (
     <p>No hay direcciones. Añade una pulsando +.</p>
   ) : (
     <div className={styles.listado}>
