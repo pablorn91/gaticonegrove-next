@@ -6,6 +6,7 @@ import Alerta from "../../components/Alerta";
 import Spinner from "../../components/Spinner";
 import useAuth from "../../hooks/useAuth";
 import { useRouter } from "next/router";
+import useUserData from "../../hooks/useUserData";
 
 import styles from "../../styles/Formulario.module.css";
 
@@ -24,7 +25,8 @@ export default function AccederRegistrar() {
 
   const [alerta, setAlerta] = useState({});
 
-  const { auth, setAuth, setLoading, setCart } = useAuth();
+  const { auth, setAuth, setLoading } = useAuth();
+  const { setCart, setAddresses } = useUserData();
   const router = useRouter();
 
   useEffect(() => {
@@ -79,8 +81,8 @@ export default function AccederRegistrar() {
         email: data.user.email,
         lastnames: data.user.lastnames,
       });
-      const DbCart = data.user.shoppingCart ?? [];
-      setCart(DbCart);
+      setCart(data.user.shoppingCart ?? []);
+      setAddresses(data.user.Addresses ?? []);
     } catch (error) {
       console.log(error);
     }

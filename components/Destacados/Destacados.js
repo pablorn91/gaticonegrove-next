@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "../styles/Destacados.module.css";
+import styles from "./Destacados.module.css";
 
 function Destacados({ destacadosProps }) {
   const {

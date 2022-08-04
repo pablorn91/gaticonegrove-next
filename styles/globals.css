@@ -69,6 +69,6 @@ a {
   }
 }
 
-::-webkit-scrollbar {
+.MuiBox-root::-webkit-scrollbar {
   display: none;
 }

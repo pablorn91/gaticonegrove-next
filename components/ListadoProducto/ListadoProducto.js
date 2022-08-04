@@ -1,12 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { formatearDineroUSD } from "../helpers";
-import stylesListadoProducto from "../styles/ListadoProducto.module.css";
-import stylesProducto from "../styles/Producto.module.css";
+import { formatearDineroUSD } from "../../helpers";
+import styles from "./ListadoProducto.module.css";
 
 export default function ListadoProducto({ productosProps }) {
   return (
-    <div className={stylesListadoProducto.listado}>
+    <div className={styles.listado}>
       {productosProps.map((producto) => (
         <Producto key={producto.url} producto={producto} />
       ))}
@@ -19,8 +18,8 @@ function Producto({ producto }) {
   const imagen = producto.imagen[0].formats.medium.url;
 
   return (
-    <div className={stylesProducto.producto}>
-      <Link href={`/productos/${url}`}>
+    <div className={styles.producto}>
+      <Link href={`/producto/${url}`}>
         <a>
           <Image
             layout="responsive"
@@ -33,7 +32,7 @@ function Producto({ producto }) {
       </Link>
 
       <h3>{titulo}</h3>
-      <p className={stylesProducto.precio}>{formatearDineroUSD(precio)}</p>
+      <p className={styles.precio}>{formatearDineroUSD(precio)}</p>
     </div>
   );
 }

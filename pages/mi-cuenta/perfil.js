@@ -1,21 +1,22 @@
-import { useState, useMemo, useEffect } from "react";
-import Layout from "../../components/Layout";
-import useAuth from "../../hooks/useAuth";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { HiPlus } from "react-icons/hi";
+import { parseJwt } from "../../helpers";
 import Spinner from "../../components/Spinner";
 import Alerta from "../../components/Alerta";
 import BasicModal from "../../components/BasicModal";
 import AddressForm from "../../components/AddressForm";
 import ListadoAddress from "../../components/ListadoAddress";
-import { HiPlus } from "react-icons/hi";
-import { parseJwt } from "../../helpers";
+import Layout from "../../components/Layout";
+import useAuth from "../../hooks/useAuth";
+import useUserData from "../../hooks/useUserData";
 import axiosClient from "../../config/axios";
 import stylesFormulario from "../../styles/Formulario.module.css";
 import stylesPerfil from "../../styles/Perfil.module.css";
-import { getAddressesApi } from "../../api/address";
 
 export default function Perfil() {
-  const { auth, setAuth, setCart } = useAuth();
+  const { auth, setAuth } = useAuth();
+  const { clearUserData } = useUserData();
   const router = useRouter();
 
   const [newUserDates, setNewUserDates] = useState({
@@ -37,7 +38,7 @@ export default function Perfil() {
   const logout = () => {
     localStorage.removeItem("token");
     setAuth({});
-    setCart([]);
+    clearUserData();
   };
 
   const handleOnChangeNewUserDates = (e) => {
@@ -236,65 +237,26 @@ export default function Perfil() {
 }
 
 function Addresses() {
-  const [addresses, setAddresses] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [titleModal, setTitleModal] = useState("");
   const [formModal, setFormModal] = useState(null);
-  const handleOpen = (title) => {
+
+  const { addresses, addAddress, deleteAddress } = useUserData();
+
+  const handleOpen = (title, address) => {
     setTitleModal(title);
     setFormModal(
       <AddressForm
-        isNewAddress={true}
         handleClose={handleClose}
         addAddress={addAddress}
+        isNewAddress={address ? false : true}
+        address={address || null}
       />
     );
     setOpenModal(true);
   };
+
   const handleClose = () => setOpenModal(false);
-
-  useEffect(() => {
-    (async () => {
-      setLoading(true);
-      const data = await getAddressesApi();
-      setAddresses(data);
-      setLoading(false);
-    })();
-  }, []);
-
-  useEffect(() => {
-    const updateAddressInDB = async () => {
-      const token = localStorage.getItem("token");
-
-      if (!token) {
-        return;
-      }
-
-      if (addresses === null) return;
-
-      try {
-        await axiosClient.put(
-          `/users/${parseJwt(token).id}`,
-          {
-            Addresses: addresses,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    updateAddressInDB();
-  }, [addresses]);
-
-  const addAddress = (address) => {
-    setAddresses([...addresses, address]);
-  };
 
   return (
     <>
@@ -308,8 +270,8 @@ function Addresses() {
       <div className={stylesPerfil.datos}>
         <ListadoAddress
           addresses={addresses}
-          setAddresses={setAddresses}
-          loading={loading}
+          handleOpen={handleOpen}
+          deleteAddress={deleteAddress}
         />
       </div>
       <BasicModal open={openModal} handleClose={handleClose} title={titleModal}>

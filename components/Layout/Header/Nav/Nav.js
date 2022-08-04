@@ -10,15 +10,17 @@ import {
   HiMenu,
   HiX,
 } from "react-icons/hi";
-import useAuth from "../hooks/useAuth";
-import styles from "../styles/Nav.module.css";
+import useAuth from "../../../../hooks/useAuth";
+import useUserData from "../../../../hooks/useUserData";
+import styles from "./Nav.module.css";
 
 const Nav = () => {
   const router = useRouter();
 
   const [isChecked, setIsChecked] = useState(false);
 
-  const { auth, changeOpenCartSiderbar } = useAuth();
+  const { auth } = useAuth();
+  const { changeOpenCartSiderbar } = useUserData();
 
   const handleOnChange = () => {
     setIsChecked(!isChecked);
@@ -35,12 +37,10 @@ const Nav = () => {
 
   return (
     <div className="contenedor">
-      
       <nav className={styles.navegacionContenedor}>
-      
         <div className={styles.burgerMenu}>
           <div className={styles.menuIcon}>
-             <HiMenu />
+            <HiMenu />
           </div>
           <input
             type="checkbox"
@@ -52,13 +52,13 @@ const Nav = () => {
           <div className={styles.contenedorMenuMovil}>
             <div className={styles.cerrarMenuMovil}>
               <HiX />
-            
-            <input
-              type="checkbox"
-              className={styles.inputCerrarMenu}
-              checked={isChecked}
-              onChange={handleOnChange}
-            />
+
+              <input
+                type="checkbox"
+                className={styles.inputCerrarMenu}
+                checked={isChecked}
+                onChange={handleOnChange}
+              />
             </div>
             <div className={styles.menuMovil}>
               <div className={styles.busquedaMenuMovil}>
@@ -94,42 +94,45 @@ const Nav = () => {
               </Link>
 
               {Object.values(auth).length === 0 ? (
-                  <Link href='/mi-cuenta/acceder-registrarse'>
+                <Link href="/mi-cuenta/acceder-registrarse">
                   <a
                     className={
-                      router.pathname == "/mi-cuenta/acceder-registrarse" ? styles.active : ""
+                      router.pathname == "/mi-cuenta/acceder-registrarse"
+                        ? styles.active
+                        : ""
                     }
                   >
-                    Acceder / Registrarse 
+                    Acceder / Registrarse
                   </a>
                 </Link>
-              ): (
-                <Link href='/mi-cuenta/perfil'>
-                <a
-                  className={
-                    router.pathname == "/mi-cuenta/perfil" ? styles.active : ""
-                  }
-                >
-                  Mi Cuenta 
-                </a>
-              </Link>
+              ) : (
+                <Link href="/mi-cuenta/perfil">
+                  <a
+                    className={
+                      router.pathname == "/mi-cuenta/perfil"
+                        ? styles.active
+                        : ""
+                    }
+                  >
+                    Mi Cuenta
+                  </a>
+                </Link>
               )}
-              
             </div>
           </div>
         </div>
 
         <div className={styles.logo}>
-         <Link href='/'>
-           <a>
+          <Link href="/">
+            <a>
               <Image
-                  width={280}
-                  height={50}
-                  src="/img/logo.svg"
-                  alt={"Logo Gatico Negro"}
+                width={280}
+                height={50}
+                src="/img/logo.svg"
+                alt={"Logo Gatico Negro"}
               />
-           </a>
-         </Link>
+            </a>
+          </Link>
         </div>
 
         <div className={styles.navegacion}>
@@ -165,47 +168,51 @@ const Nav = () => {
             </div>
             <div className={styles.icono}>
               {Object.values(auth).length === 0 ? (
-                <Link href='/mi-cuenta/acceder-registrarse'>
-                <a className={
-                  router.pathname == "/mi-cuenta/acceder-registrarse" ? styles.activeIcon : ""
-                }>
-                  <HiOutlineUserCircle />
-                </a>
-              </Link>
-              ): (
-                <Link href='/mi-cuenta/perfil'>
-                <a className={
-                  router.pathname == "/mi-cuenta/perfil" ? styles.activeIcon : ""
-                }>
-                  <HiOutlineUserCircle />
-                </a>
-              </Link>
-              ) }
-              
+                <Link href="/mi-cuenta/acceder-registrarse">
+                  <a
+                    className={
+                      router.pathname == "/mi-cuenta/acceder-registrarse"
+                        ? styles.activeIcon
+                        : ""
+                    }
+                  >
+                    <HiOutlineUserCircle />
+                  </a>
+                </Link>
+              ) : (
+                <Link href="/mi-cuenta/perfil">
+                  <a
+                    className={
+                      router.pathname == "/mi-cuenta/perfil"
+                        ? styles.activeIcon
+                        : ""
+                    }
+                  >
+                    <HiOutlineUserCircle />
+                  </a>
+                </Link>
+              )}
             </div>
             <div className={styles.icono}>
-              <Link href='/favoritos'>
-                <a className={
-                  router.pathname == "/favoritos" ? styles.activeIcon : ""
-                }>
-                   <HiOutlineHeart />
+              <Link href="/favoritos">
+                <a
+                  className={
+                    router.pathname == "/favoritos" ? styles.activeIcon : ""
+                  }
+                >
+                  <HiOutlineHeart />
                 </a>
               </Link>
-             
             </div>
-            <div
-              onClick={changeOpenCartSiderbar}
-              className={styles.icono}
-            >
+            <div onClick={changeOpenCartSiderbar} className={styles.icono}>
               <HiOutlineShoppingBag />
             </div>
-            {Object.values(auth).length !== 0 && 
-           <p className={styles.saludoAutenticado}>Hola, {auth.name}</p> }
+            {Object.values(auth).length !== 0 && (
+              <p className={styles.saludoAutenticado}>Hola, {auth.name}</p>
+            )}
           </div>
-          
         </div>
       </nav>
-      
     </div>
   );
 };

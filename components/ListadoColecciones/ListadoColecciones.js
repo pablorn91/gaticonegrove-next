@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import stylesListadoColecciones from "../styles/ListadoColecciones.module.css";
-import stylesColeccion from "../styles/Coleccion.module.css";
+import styles from "./ListadoColecciones.module.css";
 
 export default function ({ coleccionesProps }) {
   return (
-    <div className={stylesListadoColecciones.listado}>
+    <div className={styles.listado}>
       {coleccionesProps.map((coleccion) => (
         <Coleccion key={coleccion.id} coleccion={coleccion} />
       ))}
@@ -18,9 +17,9 @@ function Coleccion({ coleccion }) {
 
   console.log();
   return (
-    <div className={stylesColeccion.coleccion}>
+    <div className={styles.coleccion}>
       <h3>{nombre}</h3>
-      <Link href={`/colecciones/${url}`}>
+      <Link href={`/coleccion/${url}`}>
         <a>
           <Image
             layout="responsive"

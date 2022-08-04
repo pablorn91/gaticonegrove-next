@@ -1,3 +1,15 @@
+.listado {
+    display: grid;
+    gap: 1rem;
+    margin: 5rem 0;
+}
+
+@media (min-width:768px) {
+    .listado {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
 .coleccion {
     margin-bottom: 5rem;
 }

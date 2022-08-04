@@ -1,17 +1,21 @@
 import { useState } from "react";
 import Alerta from "./Alerta";
-import { createAddressApi } from "../api/address";
-import stylesFormulario from "../styles/Formulario.module.css";
+import styles from "../styles/Formulario.module.css";
 
-export default function AddressForm({ isNewAddress, handleClose, addAddress }) {
+export default function AddressForm({
+  isNewAddress,
+  address,
+  handleClose,
+  addAddress,
+}) {
   const [addressForm, setAddressForm] = useState({
-    title: "",
-    name: "",
-    address: "",
-    city: "",
-    state: "",
-    postalCode: "",
-    phone: "",
+    title: address?.title || "",
+    name: address?.name || "",
+    address: address?.address || "",
+    city: address?.city || "",
+    state: address?.state || "",
+    postalCode: address?.postalCode || "",
+    phone: address?.phone || "",
   });
   const [alerta, setAlerta] = useState({});
 
@@ -33,7 +37,11 @@ export default function AddressForm({ isNewAddress, handleClose, addAddress }) {
       return;
     }
 
-    addAddress(addressForm);
+    isNewAddress ? createAddress() : updateAddress();
+  };
+
+  const createAddress = async () => {
+    await addAddress(addressForm);
     setAlerta({
       msg: "Dirección creada exitosamente",
     });
@@ -44,11 +52,15 @@ export default function AddressForm({ isNewAddress, handleClose, addAddress }) {
     }, 2000);
   };
 
+  const updateAddress = () => {
+    console.log("actualizando direccion");
+  };
+
   const { msg } = alerta;
   return (
     <form onSubmit={handleSubmit}>
       {msg && <Alerta alerta={alerta} />}
-      <div className={stylesFormulario.campo}>
+      <div className={styles.campo}>
         <label htmlFor="title">Título de la dirección:</label>
         <input
           id="title"
@@ -60,8 +72,8 @@ export default function AddressForm({ isNewAddress, handleClose, addAddress }) {
         />
       </div>
 
-      <div className={stylesFormulario.dobleCampo}>
-        <div className={stylesFormulario.campo}>
+      <div className={styles.dobleCampo}>
+        <div className={styles.campo}>
           <label htmlFor="name">Nombre y Apellidos:</label>
           <input
             id="name"
@@ -73,7 +85,7 @@ export default function AddressForm({ isNewAddress, handleClose, addAddress }) {
           />
         </div>
 
-        <div className={stylesFormulario.campo}>
+        <div className={styles.campo}>
           <label htmlFor="address">Dirección:</label>
           <input
             id="address"
@@ -86,8 +98,8 @@ export default function AddressForm({ isNewAddress, handleClose, addAddress }) {
         </div>
       </div>
 
-      <div className={stylesFormulario.dobleCampo}>
-        <div className={stylesFormulario.campo}>
+      <div className={styles.dobleCampo}>
+        <div className={styles.campo}>
           <label htmlFor="city">Ciudad:</label>
           <input
             id="city"
@@ -99,7 +111,7 @@ export default function AddressForm({ isNewAddress, handleClose, addAddress }) {
           />
         </div>
 
-        <div className={stylesFormulario.campo}>
+        <div className={styles.campo}>
           <label htmlFor="state">Estado/Provincia/Región:</label>
           <input
             id="state"
@@ -112,8 +124,8 @@ export default function AddressForm({ isNewAddress, handleClose, addAddress }) {
         </div>
       </div>
 
-      <div className={stylesFormulario.dobleCampo}>
-        <div className={stylesFormulario.campo}>
+      <div className={styles.dobleCampo}>
+        <div className={styles.campo}>
           <label htmlFor="postalCode">Código postal:</label>
           <input
             id="postalCode"
@@ -125,7 +137,7 @@ export default function AddressForm({ isNewAddress, handleClose, addAddress }) {
           />
         </div>
 
-        <div className={stylesFormulario.campo}>
+        <div className={styles.campo}>
           <label htmlFor="phone">Número de teléfono:</label>
           <input
             id="phone"
@@ -141,7 +153,7 @@ export default function AddressForm({ isNewAddress, handleClose, addAddress }) {
       <input
         type="submit"
         value={isNewAddress ? "Guardar Dirección" : "Actualizar Dirección"}
-        className={stylesFormulario.boton}
+        className={styles.boton}
       />
     </form>
   );
