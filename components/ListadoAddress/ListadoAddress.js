@@ -1,10 +1,9 @@
+import useUserData from "../../hooks/useUserData";
 import styles from "./ListadoAddress.module.css";
 
-export default function ListadoAddress({
-  addresses,
-  handleOpen,
-  deleteAddress,
-}) {
+export default function ListadoAddress({ handleOpen }) {
+  const { addresses, deleteAddress } = useUserData();
+
   return addresses?.length === 0 || addresses === null ? (
     <p>No hay direcciones. Añade una pulsando +.</p>
   ) : (

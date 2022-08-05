@@ -59,14 +59,11 @@ function Addresses() {
   const [titleModal, setTitleModal] = useState("");
   const [formModal, setFormModal] = useState(null);
 
-  const { addresses, addAddress, deleteAddress } = useUserData();
-
   const handleOpen = (title, address) => {
     setTitleModal(title);
     setFormModal(
       <AddressForm
         handleClose={handleClose}
-        addAddress={addAddress}
         isNewAddress={address ? false : true}
         address={address || null}
       />
@@ -86,11 +83,7 @@ function Addresses() {
       </div>
       <h3 className={stylesPerfil.title}>Tus direcciones</h3>
       <div className={stylesPerfil.datos}>
-        <ListadoAddress
-          addresses={addresses}
-          handleOpen={handleOpen}
-          deleteAddress={deleteAddress}
-        />
+        <ListadoAddress handleOpen={handleOpen} />
       </div>
       <BasicModal open={openModal} handleClose={handleClose} title={titleModal}>
         {formModal}

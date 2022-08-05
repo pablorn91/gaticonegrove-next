@@ -9,7 +9,7 @@ const UserDataProvider = ({ children }) => {
   const [cart, setCart] = useState(null); //CARRITO
   const [openCartSidebar, setOpenCartSidebar] = useState(false);
   const [addresses, setAddresses] = useState(null); //DIRECCIONES
-  const [reloadAddresses, setReloadAddresses] = useState(false);
+  const [updateAddresses, setUpdateAddresses] = useState(false);
 
   const clearUserData = () => {
     setCart([]);
@@ -88,13 +88,13 @@ const UserDataProvider = ({ children }) => {
   /** Addresses functions **/
 
   useEffect(() => {
-    if (reloadAddresses) {
-      updateAddressApi();
+    if (updateAddresses) {
+      updateAddressesApi();
     }
-    setReloadAddresses(false);
-  }, [reloadAddresses]);
+    setUpdateAddresses(false);
+  }, [updateAddresses]);
 
-  const updateAddressApi = async () => {
+  const updateAddressesApi = async () => {
     const token = localStorage.getItem("token");
 
     if (!token) return;
@@ -125,7 +125,23 @@ const UserDataProvider = ({ children }) => {
     } else {
       setAddresses([...addresses, address]);
     }
-    setReloadAddresses(true);
+    setUpdateAddresses(true);
+  };
+
+  const updateAddress = (newDataAddress, idAddress) => {
+    addresses.map((address) => {
+      if (address.id === idAddress) {
+        address.title = newDataAddress.title;
+        address.name = newDataAddress.name;
+        address.address = newDataAddress.address;
+        address.city = newDataAddress.city;
+        address.state = newDataAddress.state;
+        address.postalCode = newDataAddress.postalCode;
+        address.phone = newDataAddress.phone;
+      }
+      return address;
+    });
+    setUpdateAddresses(true);
   };
 
   const deleteAddress = (idAddress) => {
@@ -133,7 +149,7 @@ const UserDataProvider = ({ children }) => {
       (address) => address.id !== idAddress
     );
     setAddresses(currentAddresses);
-    setReloadAddresses(true);
+    setUpdateAddresses(true);
   };
 
   return (
@@ -149,6 +165,7 @@ const UserDataProvider = ({ children }) => {
         addresses, //DIRECCIONES
         setAddresses,
         addAddress,
+        updateAddress,
         deleteAddress,
       }}
     >

@@ -1,13 +1,9 @@
 import { useState } from "react";
 import Alerta from "../Alerta";
+import useUserData from "../../hooks/useUserData";
 import styles from "../../styles/Formulario.module.css";
 
-export default function AddressForm({
-  isNewAddress,
-  address,
-  handleClose,
-  addAddress,
-}) {
+export default function AddressForm({ isNewAddress, address, handleClose }) {
   const [addressForm, setAddressForm] = useState({
     title: address?.title || "",
     name: address?.name || "",
@@ -18,6 +14,8 @@ export default function AddressForm({
     phone: address?.phone || "",
   });
   const [alerta, setAlerta] = useState({});
+
+  const { addAddress, updateAddress } = useUserData();
 
   const handleOnChange = (e) => {
     setAddressForm({ ...addressForm, [e.target.name]: e.target.value });
@@ -37,23 +35,16 @@ export default function AddressForm({
       return;
     }
 
-    isNewAddress ? createAddress() : updateAddress();
+    isNewAddress ? add() : update();
+    handleClose();
   };
 
-  const createAddress = async () => {
-    await addAddress(addressForm);
-    setAlerta({
-      msg: "Dirección creada exitosamente",
-    });
-
-    setTimeout(() => {
-      setAlerta({});
-      handleClose();
-    }, 2000);
+  const add = () => {
+    addAddress(addressForm);
   };
 
-  const updateAddress = () => {
-    console.log("actualizando direccion");
+  const update = () => {
+    updateAddress(addressForm, address.id);
   };
 
   const { msg } = alerta;
